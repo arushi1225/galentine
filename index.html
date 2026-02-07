@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galentine 💕</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    hsl(345, 100%, 88%),
+    hsl(10, 100%, 92%)
+  );
+  color: #5a2a2a;
+  overflow-x: hidden;
+  transition: background 0.3s linear;
+}
+
+
+/* SECTIONS */
+section {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* HERO */
+.hero {
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #fff;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.no {
+  background: #fff;
+  color: #ff4d6d;
+}
+
+.success {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.share {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.8s ease;
+}
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* GALLERY */
+.gallery {
+  max-width: 900px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.4rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(255, 77, 109, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05) rotate(-0.5deg);
+}
+
+.card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+/* CONFETTI */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confettiFall 3s linear forwards;
+  z-index: 9999;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.tap {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: 0.3s ease;
+}
+
+.tap:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="WhatsApp Audio 2026-02-07 at 12.50.40 PM.mpeg" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 id="title"></h1>
+
+  <div class="buttons">
+    <button class="yes" id="yesBtn">YES BESTIE 💖</button>
+    <button class="no" id="noBtn">ABSOLUTELY NOT 😜</button>
+  </div>
+
+  <div class="success" id="success">
+    <h2>Best decision ever 💕</h2>
+    <p>This Galentine’s Day just got ICONIC ✨</p>
+    <div class="share" id="shareBtn">Send this to your bestie 📸</div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section>
+  <div class="fade-in">
+    <h2>
+      Buy me waffles & I’ll love you forever 🧇💕
+    </h2>
+    
+
+    <p style="margin-top:1rem; font-size:1rem; opacity:0.8;">
+      (I will stay mad until waffles appear 😤)
+    </p>
+
+    <p class="tap" onclick="this.textContent='Okay fine… I miss you already 🥹💕'">
+      tap me 👀
+    </p>
+  </div>
+</section>
+
+
+<!-- GALLERY -->
+<section>
+  <div class="gallery fade-in">
+    <h2>Our Memories 💕</h2>
+    <p>Every photo = a core memory ✨</p>
+
+    <div class="grid">
+      <div class="card"><img src="c:\Users\hp\Downloads\1.jpeg"></div>
+      <div class="card"><img src="c:\Users\hp\Downloads\2.jpeg"></div>
+      <div class="card"><img src="c:\Users\hp\Downloads\3.jpeg"></div>
+      <div class="card"><img src="c:\Users\hp\Downloads\4.jpeg"></div>
+      <div class="card"><img src="c:\Users\hp\Downloads\5.jpeg"></div>
+      <div class="card"><img src="c:\Users\hp\Downloads\6.jpeg"></div>
+      
+    </div>
+  </div>
+</section>
+
+<script>
+// Title personalization
+const params = new URLSearchParams(window.location.search);
+const from = params.get("from") || "your Jalkukdi";
+document.getElementById("title").textContent =
+  `Will you be my Galentine Viree? 💕 — from ${from}`;
+
+// Music
+const music = document.getElementById("bgMusic");
+document.addEventListener("click", () => {
+  music.volume = 0.25;
+  music.play().catch(()=>{});
+}, { once: true });
+
+// No button sass
+const sass = ["RUDE 😤","EXCUSE ME??","WOW OK 💅","JUST SAY YES 😭"];
+let s = 0;
+noBtn.onmouseover = moveNo;
+noBtn.onclick = moveNo;
+
+function moveNo() {
+  noBtn.style.transform =
+    `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+  noBtn.textContent = sass[s++ % sass.length];
+}
+
+// Confetti
+function launchConfetti() {
+  const colors = ["#ff4d6d","#ffd6e0","#fff","#ff85a1"];
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = Math.random()*2 + 2 + "s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+// Yes button
+yesBtn.onclick = () => {
+  yesBtn.style.display = noBtn.style.display = "none";
+  success.style.display = "flex";
+  launchConfetti();
+};
+
+// Share
+shareBtn.onclick = async () => {
+  if (navigator.share) {
+    await navigator.share({
+      title: "Be my Galentine 💕",
+      text: "Will you be my Galentine?",
+      url: window.location.href
+    });
+  } else {
+    alert("Screenshot & send 💕");
+  }
+};
+
+// Fade-in
+const observer = new IntersectionObserver(entries =>
+  entries.forEach(e => e.isIntersecting && e.target.classList.add("show"))
+);
+document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+// Scroll-based gradient shift 💕
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+  const docHeight =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  const progress = Math.min(scrollY / docHeight, 1);
+
+  const hue1 = 345 - progress * 40; // pink → peach
+  const hue2 = 10 + progress * 30;  // peach → lilac
+
+  document.body.style.background = `
+    linear-gradient(
+      135deg,
+      hsl(${hue1}, 100%, 88%),
+      hsl(${hue2}, 100%, 92%)
+    )
+  `;
+});
+
+</script>
+
+</body>
+</html>
